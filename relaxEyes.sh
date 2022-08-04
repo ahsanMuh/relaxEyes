@@ -10,7 +10,7 @@ DESKTOP_FILE="$HOME/.config/autostart/relaxEyes.desktop"
 # defaults
 BREAK_INTERVAL=20 # 20 seconds
 INTERVAL=1200     # 20 minute
-INCR=.20          # controls brightness
+INCR=.70          # controls brightness
 
 # set script name
 RELAX_EYES_SH=$(basename "$0")
