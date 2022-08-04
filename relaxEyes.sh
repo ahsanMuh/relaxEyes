@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#set -ex
 
 # relaxEyes.sh - Reminds you to relax your eyes.
 #
@@ -9,22 +10,22 @@ DESKTOP_FILE="$HOME/.config/autostart/relaxEyes.desktop"
 # defaults
 BREAK_INTERVAL=20 # 20 seconds
 INTERVAL=1200     # 20 minute
-INCR=.50          # controls brightness
+INCR=.20          # controls brightness
 
 # set script name
 RELAX_EYES_SH=$(basename "$0")
 
 show_usage() {
     cat <<-EndUsage
-		Usage: $RELAX_EYES_SH [OPTION]
-		Reminds you to relax your eyes by adjusting monitor brightness.
-		
-		OPTION
-		  -d    Starts the reminder daemon.
-		  -h    Shows this help message.
-		  -r    Removes autostart configuration.
-		  -s    Configures autostart, so that script can start after you login.
-	EndUsage
+        Usage: $RELAX_EYES_SH [OPTION]
+        Reminds you to relax your eyes by adjusting monitor brightness.
+        
+        OPTION
+          -d    Starts the reminder daemon.
+          -h    Shows this help message.
+          -r    Removes autostart configuration.
+          -s    Configures autostart, so that script can start after you login.
+    EndUsage
     exit 0
 }
 
@@ -58,14 +59,14 @@ setup_autostart() {
     fi
 
     cat >"$DESKTOP_FILE" <<-EndFile
-		[Desktop Entry]
-		Type=Application
-		Name=Relax Eyes
-		Comment=Reminds you to relax your eyes
-		Exec=$exec_path -d
-		Terminal=false
-		StartupNotify=false
-	EndFile
+        [Desktop Entry]
+        Type=Application
+        Name=Relax Eyes
+        Comment=Reminds you to relax your eyes
+        Exec=$exec_path -d
+        Terminal=false
+        StartupNotify=false
+    EndFile
     echo
     echo "Autostart configuration done and you'll be reminded to take a break."
     echo "Now save you work then logout and login again!"
@@ -85,21 +86,32 @@ remove_autostart() {
 }
 
 decrease_brightness() {
+    echo "decreasing brightness!"
     output="$1"
     incr="$2"
 
-    old_brightness=$(xrandr --verbose | grep rightness | awk '{ print $2 }')
-    bright=$(echo "scale=2; $old_brightness - $incr" | bc)
-    xrandr --output "$output" --brightness "$bright"
+    old_brightness=$(xrandr --verbose | grep rightness | awk '{ print $2 }' | head -n 1)
+    bright=$(echo "scale=2; $old_brightness - $incr" | bc | head -n 1)
+
+    for i in $output
+    do
+        xrandr --output "$i" --brightness "$bright"
+    done
+
 }
 
 increase_brightness() {
+    echo "increase brightness!"
     output="$1"
     incr="$2"
 
-    old_brightness=$(xrandr --verbose | grep rightness | awk '{ print $2 }')
-    bright=$(echo "scale=2; $old_brightness + $incr" | bc)
-    xrandr --output "$output" --brightness "$bright"
+    old_brightness=$(xrandr --verbose | grep rightness | awk '{ print $2 }' | head -n 1)
+    bright=$(echo "scale=2; $old_brightness + $incr" | bc | head -n 1)
+
+    for i in $output
+    do
+        xrandr --output "$i" --brightness "$bright"
+    done
 }
 
 if [[ -z "$1" || "$1" = "-h" || "$1" = "--help" ]]; then

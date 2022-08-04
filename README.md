@@ -9,13 +9,13 @@ Your eye doctor may mentioned about it. It's basically for every 20 minutes spen
 ### Install
 
 ```shell
-curl -s -L https://raw.githubusercontent.com/nangsan/relaxEyes/main/install.sh | bash
+curl -s -L https://raw.githubusercontent.com/ahsanMuh/relaxEyes/main/install.sh | bash
 ```
 
 ### Uninstall
 
 ```shell
-curl -s -L https://raw.githubusercontent.com/nangsan/relaxEyes/main/install.sh | uninstall=true bash
+curl -s -L https://raw.githubusercontent.com/ahsanMuh/relaxEyes/main/install.sh | uninstall=true bash
 ```
 
 ### Usage
@@ -27,9 +27,10 @@ relaxEyes.sh -h
 ### Todo
 - [x] add install script
 - [ ] support external monitors
-- [ ] support multiple monitors
+- [x] support multiple monitors
 - [ ] support other distros
 
 ### Note
 Tested only on *Pop!_OS 18.04* and it just works :see_no_evil:. Others are always welcome to test in different distros and raise issues if something breaks.
-
+<br>
+Tested the script to work on multiple displays on ubuntu 18.04

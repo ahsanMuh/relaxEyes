@@ -9,7 +9,7 @@
 #
 # curl https://raw.githubusercontent.com/nangsan/relaxEyes/main/install.sh | uninstall=true bash
 
-INSTALL_SCRIPT="curl -s -L https://raw.githubusercontent.com/nangsan/relaxEyes/main/install.sh"
+INSTALL_SCRIPT="curl -s -L https://raw.githubusercontent.com/ahsanMuh/relaxEyes/main/install.sh"
 
 INSTALL_DIR="$HOME/.local/bin"
 INSTALL_NAME="relaxEyes.sh"
@@ -55,7 +55,7 @@ download_file() {
     fi
 }
 
-DOWNLOAD_URL="https://raw.githubusercontent.com/nangsan/relaxEyes/main/relaxEyes.sh"
+DOWNLOAD_URL="https://raw.githubusercontent.com/ahsanMuh/relaxEyes/main/relaxEyes.sh"
 DOWNLOAD_FILE=$(mktemp)
 
 download_file "$DOWNLOAD_URL" "$DOWNLOAD_FILE"
